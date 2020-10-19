@@ -1,6 +1,10 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
+const express = require('express')
+const app = express()
+const port = 3005
+
 const googleSignIn = () => {
 	puppeteer.use(StealthPlugin())
 	
@@ -21,4 +25,11 @@ const googleSignIn = () => {
 	})
 }
 
-googleSignIn()
+app.get('/signin/', (req, res) => {
+	googleSignIn()
+	console.log('-- Signed into Google --')
+})
+
+app.listen(port, () => {
+	console.log(`Listening at http://localhost:${port}`)
+})
