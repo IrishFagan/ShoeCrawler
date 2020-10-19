@@ -7,5 +7,7 @@ This is mostly a passion project although my hopes are to have it develop into s
 ## Tech
 
 [React](https://github.com/facebook/react)
+
 [Electron](https://github.com/electron/electron)
+
 [Puppeteer](https://github.com/puppeteer/puppeteer)
