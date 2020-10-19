@@ -2,7 +2,7 @@
 
 The purpose of this app is to crawl multiple sites to purchase shoes or other exclusive items that can be resold at a higher price.
 
-This is mostly a passion project although my hopes are to have it develop into something more with the help of friends.
+This is mostly a passion project although my hope is to have it develop into something more with the help of friends.
 
 ## Tech
 
