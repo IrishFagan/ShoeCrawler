@@ -20,6 +20,7 @@ const googleSignIn = () => {
 
 		await page.waitFor(2000)
 		await page.$eval('input[type=email]', el => el.value = 'coolguy@gmail.com'/*username here*/)
+		await page.waitFor(2000)
 		await page.keyboard.press('Enter')
 		await page.waitFor(2000)
 		await page.$eval('input[type=password]', el => el.value = '123'/*password here*/)
@@ -32,6 +33,11 @@ const googleSignIn = () => {
 
 const spawnTask = body => {
 	console.log(body)
+	puppeteer.launch({headless: false}).then(async browser => {
+		const page = await browser.newPage()
+		await page.goto(`${body.site}`)
+		await browser.close()
+	})
 }
 
 app.get('/signin/', (req, res) => {
