@@ -1,9 +1,14 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const express = require('express')
 const app = express()
 const port = 3005
+
+app.use(bodyParser.json())
+app.use(cors({origin: true}))
 
 const googleSignIn = () => {
 	puppeteer.use(StealthPlugin())
@@ -25,9 +30,18 @@ const googleSignIn = () => {
 	})
 }
 
+const spawnTask = body => {
+	console.log(body)
+}
+
 app.get('/signin/', (req, res) => {
 	googleSignIn()
 	console.log('-- Signed into Google --')
+})
+
+app.post('/task', (req, res) => {
+	console.log('-- Received POST --')
+	spawnTask(req.body)
 })
 
 app.listen(port, () => {
