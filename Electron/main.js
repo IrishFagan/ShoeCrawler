@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron')
+require('../src/puppeteer.js')
 
 const createWindow = () => {
 	const win = new BrowserWindow({
