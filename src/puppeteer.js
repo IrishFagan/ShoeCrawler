@@ -11,10 +11,26 @@ app.use(bodyParser.json())
 app.use(cors({origin: true}))
 puppeteer.use(StealthPlugin())
 
-const googleSignIn = async (browser) => {
-	browser = await puppeteer.launch({headless: false})
+const run = async () => {
+	const browser = await puppeteer.launch({headless: true})
+	await googleSignIn(browser)
+}
 
-	var page = await browser.newPage()
+const returnHeadfull = async (browser) => {
+	await browser.close()
+	return await puppeteer.launch({headless: false})
+}
+
+const googleSignIn = async (brswr) => {
+	var pages = await brswr.pages()
+	var page = await pages[0]
+	var cookies = await page.cookies()
+	var browser = await returnHeadfull(brswr)
+	pages = await browser.pages()
+	page = await browser.newPage()
+	await pages[0].close()
+	await page.setCookie(...cookies)
+	
 	await page.goto('https://accounts.google.com/signin/v2/identifier?sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
 	await page.waitFor(3500)
 	await page.$eval('input[type=email]', el => el.value = 'coolguy@gmail.com'/*username here*/)
@@ -24,7 +40,7 @@ const googleSignIn = async (browser) => {
 	await page.$eval('input[type=password]', el => el.value = '123'/*password here*/)
 	await page.keyboard.press('Enter')
 	await page.waitFor(10000)
-	const cookies = await page.cookies()
+	cookies = await page.cookies()
 	await browser.close()
 
 	browser = await puppeteer.launch({headless: true})
@@ -45,8 +61,7 @@ const spawnTask = body => {
 }
 
 app.get('/signin/', (req, res) => {
-	googleSignIn(puppeteer.launch({headless: true}))
-	console.log('-- Signed into Google --')
+	run()
 })
 
 app.post('/task', (req, res) => {
