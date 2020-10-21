@@ -25,8 +25,14 @@ const googleSignIn = () => {
 		await page.waitFor(2000)
 		await page.$eval('input[type=password]', el => el.value = '123'/*password here*/)
 		await page.keyboard.press('Enter')
-		await page.screenshot({path: 'result.png', fullPage: true})
+		await page.waitFor(10000)
+		const cookies = await page.cookies()
+
+		const page2 = await browser.newPage()
+		await page2.setCookie(...cookies)
+		await page2.goto('http://google.com')
 	
+		await page2.waitFor(100000)
 		await browser.close()
 	})
 }
