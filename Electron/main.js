@@ -7,9 +7,10 @@ const createWindow = () => {
 		height: 600,
 		webPreferences: {
 			nodeIntegration: true
-		}
+		},
+		frame: false
 	})
-
+	win.removeMenu()
 	win.loadURL('http://localhost:3000')
 }
 
