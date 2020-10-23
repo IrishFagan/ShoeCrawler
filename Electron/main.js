@@ -4,15 +4,16 @@ require('../src/puppeteer.js')
 const createWindow = () => {
 	const win = new BrowserWindow({
 		width: 800,
-		height: 600,
+		height: 550,
+		transparent: true,
 		webPreferences: {
 			devTools: true,
 			nodeIntegration: true
 		},
-		frame: true,
+		frame: false,
 		resizable: false,
 		fullscreenable: true,
-		center: true
+		center: true,
 	})
 	win.loadURL('http://localhost:3000')
 }
@@ -35,6 +36,7 @@ ipcMain.on('open-captcha', () => {
 	const captcha = new BrowserWindow({
 		width: 400,
 		height: 500,
+		title: "SAD AIO",
 		webPreferences: {
 			nodeIntegration: true
 		},
