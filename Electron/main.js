@@ -1,11 +1,11 @@
 const { app, BrowserWindow, remote, ipcMain } = require('electron')
-require('../src/puppeteer.js')
+require('../src/taskServer.js')
 
 const createWindow = () => {
 	const win = new BrowserWindow({
 		width: 800,
-		height: 550,
-		transparent: true,
+		height: 600,
+		useContentSize: true,
 		webPreferences: {
 			devTools: true,
 			nodeIntegration: true
