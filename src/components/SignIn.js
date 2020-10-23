@@ -9,7 +9,7 @@ const SignIn = () => {
 
 	return(
 		<div>
-		  <label>Open Captcha Window
+		  <label>
         <form onSubmit={handleSubmit}>
           <button type="submit">Open Captcha</button>
         </form>
