@@ -26,22 +26,35 @@ function App() {
       })
   }
 
+  document.body.style.margin = "0"
+  document.body.style.overflowY = "hidden"
+
+  const divStyle = {
+    backgroundColor: "#4d4d4d",
+    height: "100vh",
+    margin: "0px",
+  }
+
   return (
-    <div className="App">
-      <h1>Shoe Scraper</h1>
-      <SignIn /><br />
-      <form onSubmit={handleTaskSubmit}>
-        <input type="text" value={taskField} onChange={e => setTaskField(e.target.value)} />
-        <input type="submit" />
-      </form>
-      <ul>
-        {tasks.map(task => 
-          <Task key={task.id} taskContent={task.site} />
-        )}
-      </ul>
-      <Task />
+    <div style={divStyle} className="App">
+      <div style={{padding: "10px"}}>
+        <h1>Shoe Scraper</h1>
+        <SignIn /><br />
+        <form onSubmit={handleTaskSubmit}>
+          <input type="text" value={taskField} onChange={e => setTaskField(e.target.value)} />
+          <input type="submit" />
+        </form>
+        <ul>
+          {tasks.map(task => 
+            <Task key={task.id} taskContent={task.site} />
+          )}
+        </ul>
+        <Task />
+      </div>
     </div>
   );
 }
+
+
 
 export default App;
