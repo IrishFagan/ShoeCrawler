@@ -6,10 +6,12 @@ const express = require('express')
 
 const app = express()
 const port = 3005
+const tasks = []
 
 app.use(bodyParser.json())
 app.use(cors({origin: true}))
 puppeteer.use(StealthPlugin())
+app.use(express.json())
 
 const returnHeadfull = async (browser) => {
 	await browser.close()
@@ -18,16 +20,23 @@ const returnHeadfull = async (browser) => {
 
 const spawnTask = body => {
 	console.log(body)
-	puppeteer.launch({headless: false}).then(async browser => {
-		const page = await browser.newPage()
-		await page.goto(`${body.site}`)
-		await browser.close()
-	})
+	return {
+		site: body.site,
+		date: body.date,
+		id: Math.floor(Math.random() * 40)
+	}
 }
 
-app.post('/task', (req, res) => {
+app.get('/task', (req, res) => {
+	res.json(tasks)
+})
+
+app.post('/tasks', (req, res) => {
 	console.log('-- Received POST --')
-	spawnTask(req.body)
+	const savedTask = spawnTask(req.body)
+	tasks.concat(savedTask)
+	console.log(savedTask)
+	res.json(savedTask)
 })
 
 app.listen(port, () => {
