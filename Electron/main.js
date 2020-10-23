@@ -6,15 +6,14 @@ const createWindow = () => {
 		width: 800,
 		height: 600,
 		webPreferences: {
-			nodeIntegration: true,
-			preload: __dirname + '/preload.js'
+			devTools: true,
+			nodeIntegration: true
 		},
-		frame: false,
+		frame: true,
 		resizable: false,
 		fullscreenable: true,
 		center: true
 	})
-	win.removeMenu()
 	win.loadURL('http://localhost:3000')
 }
 
