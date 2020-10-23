@@ -19,12 +19,15 @@ const returnHeadfull = async (browser) => {
 	return await puppeteer.launch({headless: false})
 }
 
-const getSupremeStock = () => {
-	return axios.get('http://www.supremenewyork.com/mobile_stock.json')
+const getSupremeStock = async () => {
+	return await axios
+		.get('https://www.supremenewyork.com/mobile_stock.json')
+		.then(res => res.data.products_and_categories)
 }
 
-const spawnTask = body => {
-	console.log(body)
+const spawnTask = async body => {
+	await console.log(body)
+	console.log(await getSupremeStock())
 	return {
 		site: body.site,
 		date: body.date,
@@ -36,9 +39,9 @@ app.get('/task', (req, res) => {
 	res.json(tasks)
 })
 
-app.post('/tasks', (req, res) => {
+app.post('/tasks', async (req, res) => {
 	console.log('-- Received POST --')
-	const savedTask = spawnTask(req.body)
+	const savedTask = await spawnTask(req.body)
 	tasks.concat(savedTask)
 	console.log(savedTask)
 	res.json(savedTask)
