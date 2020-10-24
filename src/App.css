@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+html
+{
+	height: 100%;
+	box-sizing: border-box;
+	border-style: solid;
+	border-color: black;
+	border-width: 5px;
+	font-family: Ubuntu;
+	overflow: hidden;
+}
+::-webkit-scrollbar {
+	background: transparent;
+}
+
+body {
+	background-color: #525252;
+	margin: 0;
+	overflow: hidden;
+	height: 80;
+	font-size: 15px;
+}
+
+.captcha {
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	border: 1px solid #757575;
+	box-shadow: 3px 3px #757575;
+	border-color: #757575;
+	border-radius: 2px;
+	background-color: #525252;
+	color: white;
+	font-family: Ubuntu;
+}
+
+.parentDiv{
+	background-color: #525252;
+	border-color: #757575;
+	box-shadow: 3px 3px #757575;
+	border-radius: 5px;
+  	border: 1px solid #757575;
+  	height: 66vh;
+  	padding: 20px;
+  	overflow-y: auto;
+  	font-family: Ubuntu;
+  	font-size: 20px;
+}
+
+.task {
+    background-color: white;
+    margin: 50px;
+    padding: 10px
+}
