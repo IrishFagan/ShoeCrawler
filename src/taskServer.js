@@ -22,12 +22,11 @@ const returnHeadfull = async (browser) => {
 const getSupremeStock = async () => {
 	return await axios
 		.get('https://www.supremenewyork.com/mobile_stock.json')
-		.then(res => res.data.products_and_categories)
+		.then(res => res.data.products_and_categories.Bags)
 }
 
-const spawnTask = async body => {
-	await console.log(body)
-	console.log(await getSupremeStock())
+const spawnTask = body => {
+	console.log(body)
 	return {
 		site: body.site,
 		date: body.date,
@@ -41,10 +40,11 @@ app.get('/task', (req, res) => {
 
 app.post('/tasks', async (req, res) => {
 	console.log('-- Received POST --')
-	const savedTask = await spawnTask(req.body)
-	tasks.concat(savedTask)
-	console.log(savedTask)
-	res.json(savedTask)
+	const task = spawnTask(req.body)
+	tasks.concat(task)
+	console.log(task)
+	res.json(task)
+	console.log(await getSupremeStock())
 })
 
 app.listen(port, () => {
