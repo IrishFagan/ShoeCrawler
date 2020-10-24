@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import '../App.css'
 const { ipcRenderer } = window.require('electron')
 
 const SignIn = () => {
@@ -10,9 +11,10 @@ const SignIn = () => {
 	return(
 		<div>
 		  <label>
-        <form onSubmit={handleSubmit}>
-          <button type="submit">Open Captcha</button>
-        </form>
+        <button 
+          onClick={handleSubmit}
+          className="captcha"
+          >Open Captcha</button>
       </label>
 		</div>
 	)
