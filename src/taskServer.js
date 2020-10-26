@@ -29,6 +29,7 @@ const spawnTask = body => {
 	console.log(body)
 	return {
 		site: body.site,
+		category: body.category,
 		date: body.date,
 		id: Math.floor(Math.random() * 40)
 	}
