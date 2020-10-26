@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 html
 {
 	height: 100%;
 	box-sizing: border-box;
 	border-style: solid;
 	border-color: black;
-	border-width: 3px;
+	border-width: 1px;
 	font-family: Ubuntu;
 	overflow: hidden;
 }
@@ -14,7 +14,7 @@ html
 }
 
 body {
-	background-color: #525252;
+	background-color: #2E2E35;
 	margin: 0;
 	overflow: hidden;
 	height: 80;
@@ -26,35 +26,35 @@ body {
 	padding: 10px;
 	margin-top: 10px;
 	margin-bottom: 30px;
-	border: 1px solid #757575;
-	box-shadow: 3px 3px #757575;
+	border: 0px solid #757575;
 	border-radius: 2px;
-	background-color: #525252;
+	background-color: #D2B48C;
 	color: white;
 	font-family: Ubuntu;
+	font-weight: bold;
 }
 
 #task-window{
 	color: white;
-	background-color: #525252;
+	background-color: #3A3A42;
 	border-color: #757575;
-	box-shadow: 3px 3px #757575;
-	border-radius: 5px;
-  	border: 1px solid #757575;
-  	height: 80vh;
+	border-radius: 2px;
+  	border: 0px solid #757575;
+  	height: 82vh;
   	padding: 20px;
   	overflow-y: auto;
   	font-family: Ubuntu;
   	font-size: 20px;
 }
 
-.task {
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 3px;
+.task {    
+	background-color: #4D4D54;
+	border: 0px solid #757575;
+    border-radius: 2px;
     margin-top: -2px;
     padding: 10px;
-    color: #525252;
+    color: white;
+    font-weight: ;
 }
 
 #task-create {
@@ -62,16 +62,22 @@ body {
 	border-radius: 3px;
 	padding: 30px;
 	position: fixed;
+	top: 20%;
 	left: 50%;
 	transform: translate(-50%, 0);
-	background-color: #757575;
+	background-color: #3A3A42;
+	opacity: .8;
 }
 
 #add-task {
 	position: fixed;
-	right: 4vh;
-	top: 84%;
-	background-color: #757575;
+	right: 3vh;
+	top: 86%;
+	border: 0px solid black;
+	border-radius: 2px;
+	background-color: #D2B48C;
+	color: white;
+	padding-top: 4px;
 }
 
 .hidden {
