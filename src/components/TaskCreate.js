@@ -3,12 +3,14 @@ import axios from 'axios'
 
 const TaskCreate = ({setTasks, tasks, visibility}) => {
   const [site, setSite] = useState('Supreme')
+  const [category, setCategory] = useState('Jackets')
   const menuVis = visibility ? 'display' : 'hidden'
 
   const handleTaskSubmit = e => {
     e.preventDefault()
     const taskObject = {
       site: site,
+      category: category,
       date: new Date().toISOString()
     }
 
@@ -25,7 +27,6 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
 
   const handleChange = e => {
     console.log(`SET SITE: ${e.target.value}`)
-    setSite(e.target.value)
   }
 
 	return(
@@ -33,12 +34,12 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
       id="task-create">
 		  <form onSubmit={handleTaskSubmit}>
         <label>Site: </label>
-        <select value={site} onChange={handleChange}>
+        <select value={site} onChange={e => setSite(e.target.value)}>
           <option value="Supreme">Supreme</option>
           <option value="Foot Locker">Foot Locker</option>
         </select><br/>
         <label>Category: </label>
-        <select>
+        <select value={category} onChange={e => setCategory(e.target.value)}>
           <option value="Jackets">Jackets</option>
           <option value="Shirts">Shirts</option>
           <option value="Tops/Sweaters">Tops/Sweaters</option>
@@ -49,8 +50,7 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
           <option value="Accessories">Accessories</option>
           <option value="Shoes">Shoes</option>
           <option value="Skate">Skate</option>        
-        </select>
-        <br />
+        </select><br />
         <input type="submit" />
 		  </form>
     </div>
