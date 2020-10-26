@@ -1,44 +1,40 @@
 import React, { useState } from 'react';
-import Task from './Task.js'
 import axios from 'axios'
+import Task from './Task.js'
+import TaskCreate from './TaskCreate.js'
 import '../App.css'
 
 const TaskWindow = () => {
 
   const [tasks, setTasks] = useState([])
   const [taskField, setTaskField] = useState('')
+  const [visibility, setVisibility] = useState(false)
 
-  const handleTaskSubmit= e => {
-    e.preventDefault()
-    const taskObject = {
-      site: taskField,
-      date: new Date().toISOString()
-    }
-
-    axios
-      .post('http://localhost:3005/tasks/',
-        taskObject)
-      .then(response => {
-        setTasks(tasks.concat(response.data))
-        setTaskField('')
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  const toggleMenu = () => {
+    setVisibility(!visibility)
+    console.log(visibility)
   }
 
 	return(
-    <div className="parentDiv">
-      <form onSubmit={handleTaskSubmit}>
-        <input type="text" value={taskField} onChange={e => setTaskField(e.target.value)} />
-        <input type="submit" />
-      </form>
-      <br />TASKS
+    <div id="task-window">
+      <TaskCreate
+        setTasks={setTasks}
+        tasks={tasks}
+        visibility={visibility}
+      /><br />
       <ul style={{padding: 0}}>
-        {tasks.map(task => 
-          <Task key={task.id} taskContent={task.site} />
+        {tasks.map((task, i) => 
+          <Task 
+            key={i} 
+            taskContent={task.site}
+            taskCategory={task.category}
+          />
         )}
       </ul>
+      <button
+        id="add-task"
+        onClick={toggleMenu}
+      >+</button>
     </div>
 	)
 }
