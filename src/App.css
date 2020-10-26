@@ -5,7 +5,7 @@ html
 	box-sizing: border-box;
 	border-style: solid;
 	border-color: black;
-	border-width: 5px;
+	border-width: 3px;
 	font-family: Ubuntu;
 	overflow: hidden;
 }
@@ -28,20 +28,20 @@ body {
 	margin-bottom: 30px;
 	border: 1px solid #757575;
 	box-shadow: 3px 3px #757575;
-	border-color: #757575;
 	border-radius: 2px;
 	background-color: #525252;
 	color: white;
 	font-family: Ubuntu;
 }
 
-.parentDiv{
+#task-window{
+	color: white;
 	background-color: #525252;
 	border-color: #757575;
 	box-shadow: 3px 3px #757575;
 	border-radius: 5px;
   	border: 1px solid #757575;
-  	height: 66vh;
+  	height: 80vh;
   	padding: 20px;
   	overflow-y: auto;
   	font-family: Ubuntu;
@@ -50,6 +50,34 @@ body {
 
 .task {
     background-color: white;
-    margin: 50px;
-    padding: 10px
+    border: 2px solid black;
+    border-radius: 3px;
+    margin-top: -2px;
+    padding: 10px;
+    color: #525252;
+}
+
+#task-create {
+	border: 1px solid black;
+	border-radius: 3px;
+	padding: 30px;
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%, 0);
+	background-color: #757575;
+}
+
+#add-task {
+	position: fixed;
+	right: 4vh;
+	top: 84%;
+	background-color: #757575;
+}
+
+.hidden {
+	display: none;
+}
+
+.display {
+	display: block;
 }
