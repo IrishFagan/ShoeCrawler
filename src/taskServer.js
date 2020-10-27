@@ -23,11 +23,8 @@ const getSupremeStock = async (category) => {
 const startTask = async (task) => {
 	console.log('Starting Task')
 	products = await getSupremeStock([task.category])
-	item = await products.filter(
-		(products) => {
-			console.log(products.name)
-			return products.name.toLowerCase().includes(task.keyword.toLowerCase())
-		}
+	item = await products.filter(products =>
+		products.name.toLowerCase().includes(task.keyword.toLowerCase())
 	)
 	console.log(item)
 	response = await axios
@@ -46,8 +43,9 @@ const generateId = () => {
 const createTask = body => {
 	console.log(body)
 	return {
-		keyword: body.keyword,
 		site: body.site,
+		keyword: body.keyword,
+		color: body.color,
 		category: body.category,
 		date: body.date,
 		id: generateId()
@@ -56,7 +54,7 @@ const createTask = body => {
 
 app.get('/start/:id', (req, res) => {
 	const task = tasks.find(task => task.id === Number(req.params.id))
-	startTasks(task)
+	startTask(task)
 	res.end()
 })
 
