@@ -10,6 +10,7 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
   const handleTaskSubmit = e => {
     e.preventDefault()
     const taskObject = {
+      keyword: keyword,
       site: site,
       category: category,
       date: new Date().toISOString()
@@ -39,7 +40,7 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
         <input
           type="text"
           value={keyword}
-          onChange={e => setKeyword(e.target.value)}
+          onChange={e =>setKeyword(e.target.value)}
         /><br />
         <label>Site: </label>
         <select value={site} onChange={e => setSite(e.target.value)}>
