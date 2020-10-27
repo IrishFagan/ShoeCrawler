@@ -23,12 +23,13 @@ const TaskWindow = () => {
         visibility={visibility}
       /><br />
       <ul style={{padding: 0, margin: 0}}>
-        {tasks.map((task, i) => 
+        {tasks.map(task => 
           <Task 
-            key={i} 
+            key={task.id} 
             content={task.site}
             category={task.category}
             keyword={task.keyword}
+            id={task.id}
           />
         )}
       </ul>
