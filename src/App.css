@@ -28,7 +28,7 @@ body {
 	margin-bottom: 30px;
 	border: 0px solid #757575;
 	border-radius: 2px;
-	background-color: #D2B48C;
+	background-color: #BDA27E;
 	color: white;
 	font-family: Ubuntu;
 	font-weight: bold;
@@ -51,10 +51,10 @@ body {
 	background-color: #4D4D54;
 	border: 0px solid #757575;
     border-radius: 2px;
-    margin-top: -2px;
+    margin-top: 2px;
     padding: 10px;
     color: white;
-    font-weight: ;
+    font-weight: 200;
 }
 
 #task-create {
@@ -75,7 +75,7 @@ body {
 	top: 86%;
 	border: 0px solid black;
 	border-radius: 2px;
-	background-color: #D2B48C;
+	background-color: #BDA27E;
 	color: white;
 	padding-top: 4px;
 }
