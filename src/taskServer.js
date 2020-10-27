@@ -7,17 +7,12 @@ const axios = require('axios')
 
 const app = express()
 const port = 3005
-const tasks = []
+var tasks = []
 
 app.use(bodyParser.json())
 app.use(cors({origin: true}))
 puppeteer.use(StealthPlugin())
 app.use(express.json())
-
-const returnHeadfull = async (browser) => {
-	await browser.close()
-	return await puppeteer.launch({headless: false})
-}
 
 const getSupremeStock = async (category) => {
 	return await axios
@@ -25,20 +20,8 @@ const getSupremeStock = async (category) => {
 		.then(res => res.data.products_and_categories[category])
 }
 
-const spawnTask = body => {
-	console.log(body)
-	return {
-		keyword: body.keyword,
-		site: body.site,
-		category: body.category,
-		date: body.date,
-		id: Math.floor(Math.random() * 40)
-	}
-}
-
-const startTasks = async () => {
+const startTask = async (task) => {
 	console.log('Starting Task')
-	task = tasks[0]
 	products = await getSupremeStock([task.category])
 	item = await products.filter(
 		(products) => {
@@ -53,17 +36,36 @@ const startTasks = async () => {
 	return
 }
 
-app.get('/start/', (req, res) => {
-	startTasks(req, res)
+const generateId = () => {
+	const maxId = tasks.length > 0
+		? Math.max(...tasks.map(task => task.id))
+		: 0
+	return maxId + 1
+}
+
+const createTask = body => {
+	console.log(body)
+	return {
+		keyword: body.keyword,
+		site: body.site,
+		category: body.category,
+		date: body.date,
+		id: generateId()
+	}
+}
+
+app.get('/start/:id', (req, res) => {
+	const task = tasks.find(task => task.id === Number(req.params.id))
+	startTasks(task)
 	res.end()
 })
 
-app.post('/tasks', async (req, res) => {
+app.post('/tasks', (req, res) => {
 	console.log('-- Received POST --')
-	const task = spawnTask(req.body)
+	const task = createTask(req.body)
 	console.log(task)
 	res.json(task)
-	tasks[0] = task
+	tasks = tasks.concat(task)
 	console.log(tasks)
 })
 
