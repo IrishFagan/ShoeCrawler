@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import '../App.css'
 
-const Task = ({ content, category, keyword, id }) => {
+const Task = ({
+  content,
+  category,
+  keyword,
+  color,
+  id
+}) => {
 
   const handleSubmission = () => {
     axios
@@ -12,7 +18,7 @@ const Task = ({ content, category, keyword, id }) => {
 
 	return(
 		<div className="task">
-      {content} - {category} - {keyword}
+      {content} - {category} - {keyword} - {color}
       <button onClick={() => handleSubmission()}>
         >
       </button>
