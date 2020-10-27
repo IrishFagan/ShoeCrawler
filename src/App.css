@@ -51,7 +51,9 @@ body {
 	background-color: #4D4D54;
 	border: 0px solid #757575;
     border-radius: 2px;
-    margin-top: 2px;
+    border-bottom: 1px solid #757575;
+    border-top: 1px solid #757575;
+    margin-top: -1px;
     padding: 10px;
     color: white;
     font-weight: 200;
