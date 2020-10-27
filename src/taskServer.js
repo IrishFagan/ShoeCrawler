@@ -47,12 +47,15 @@ const startTasks = async () => {
 		}
 	)
 	console.log(item)
+	response = await axios
+		.get(`http://www.supremenewyork.com/shop/${item[0].id}.json`)
+	console.log(await response.data)
 	return
 }
 
 app.get('/start/', (req, res) => {
-	startTasks()
-	res.json({"success": true})
+	startTasks(req, res)
+	res.end()
 })
 
 app.post('/tasks', async (req, res) => {
