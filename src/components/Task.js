@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import '../App.css'
 
-const Task = ({ taskContent, taskCategory }) => {
+const Task = ({ content, category, keyword }) => {
 
 	return(
 		<div className="task">
-      {taskContent} - {taskCategory}
+      {content} - {category} - {keyword}
+      <button onClick={() => axios.get('http://localhost:3005/start/')}>
+        >
+      </button>
     </div>
 	)
 }
