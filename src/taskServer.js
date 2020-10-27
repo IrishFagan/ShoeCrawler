@@ -19,15 +19,16 @@ const returnHeadfull = async (browser) => {
 	return await puppeteer.launch({headless: false})
 }
 
-const getSupremeStock = async () => {
+const getSupremeStock = async (category) => {
 	return await axios
 		.get('https://www.supremenewyork.com/mobile_stock.json')
-		.then(res => res.data.products_and_categories.Bags)
+		.then(res => res.data.products_and_categories[category])
 }
 
 const spawnTask = body => {
 	console.log(body)
 	return {
+		keyword: body.keyword,
 		site: body.site,
 		category: body.category,
 		date: body.date,
@@ -35,17 +36,32 @@ const spawnTask = body => {
 	}
 }
 
-app.get('/task', (req, res) => {
-	res.json(tasks)
+const startTasks = async () => {
+	console.log('Starting Task')
+	task = tasks[0]
+	products = await getSupremeStock([task.category])
+	item = await products.filter(
+		(products) => {
+			console.log(products.name)
+			return products.name.toLowerCase().includes(task.keyword.toLowerCase())
+		}
+	)
+	console.log(item)
+	return
+}
+
+app.get('/start/', (req, res) => {
+	startTasks()
+	res.json({"success": true})
 })
 
 app.post('/tasks', async (req, res) => {
 	console.log('-- Received POST --')
 	const task = spawnTask(req.body)
-	tasks.concat(task)
 	console.log(task)
 	res.json(task)
-	console.log(await getSupremeStock())
+	tasks[0] = task
+	console.log(tasks)
 })
 
 app.listen(port, () => {
