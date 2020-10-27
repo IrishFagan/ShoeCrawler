@@ -29,6 +29,7 @@ const TaskWindow = () => {
             content={task.site}
             category={task.category}
             keyword={task.keyword}
+            color={task.color}
             id={task.id}
           />
         )}
