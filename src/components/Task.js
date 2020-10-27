@@ -4,10 +4,16 @@ import '../App.css'
 
 const Task = ({ content, category, keyword }) => {
 
+  const handleSubmission = () => {
+    axios
+      .get('http://localhost:3005/start')
+      .then(res => console.log(res))
+  }
+
 	return(
 		<div className="task">
       {content} - {category} - {keyword}
-      <button onClick={() => axios.get('http://localhost:3005/start/')}>
+      <button onClick={() => handleSubmission()}>
         >
       </button>
     </div>
