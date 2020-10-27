@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import '../App.css'
 
-const Task = ({ content, category, keyword }) => {
+const Task = ({ content, category, keyword, id }) => {
 
   const handleSubmission = () => {
     axios
-      .get('http://localhost:3005/start')
+      .get(`http://localhost:3005/start/${id}`)
       .then(res => console.log(res))
   }
 
