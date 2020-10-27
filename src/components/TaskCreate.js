@@ -5,13 +5,15 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
   const [site, setSite] = useState('Supreme')
   const [category, setCategory] = useState('Jackets')
   const [keyword, setKeyword] = useState('')
+  const [color, setColor] = useState('')
   const menuVis = visibility ? 'display' : 'hidden'
 
   const handleTaskSubmit = e => {
     e.preventDefault()
     const taskObject = {
-      keyword: keyword,
       site: site,
+      keyword: keyword,
+      color: color,
       category: category,
       date: new Date().toISOString()
     }
@@ -22,6 +24,7 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
       .then(response => {
         setTasks(tasks.concat(response.data))
         setKeyword('')
+        setColor('')
       })
       .catch(error => {
         console.log(error)
@@ -36,17 +39,23 @@ const TaskCreate = ({setTasks, tasks, visibility}) => {
     <div className={`${menuVis}`}
       id="task-create">
 		  <form onSubmit={handleTaskSubmit}>
-        <label>Keyword: </label>
-        <input
-          type="text"
-          value={keyword}
-          onChange={e =>setKeyword(e.target.value)}
-        /><br />
         <label>Site: </label>
         <select value={site} onChange={e => setSite(e.target.value)}>
           <option value="Supreme">Supreme</option>
           <option value="Foot Locker">Foot Locker</option>
         </select><br/>
+        <label>Keyword: </label>
+        <input
+          type="text"
+          value={keyword}
+          onChange={e => setKeyword(e.target.value)}
+        /><br />
+        <label>Color: </label>
+        <input
+          type="text"
+          value={color}
+          onChange={e => setColor(e.target.value)}
+        /><br />
         <label>Category: </label>
         <select value={category} onChange={e => setCategory(e.target.value)}>
           <option value="Jackets">Jackets</option>
