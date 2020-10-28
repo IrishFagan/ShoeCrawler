@@ -7,6 +7,7 @@ const Task = ({
   category,
   keyword,
   color,
+  size,
   id
 }) => {
 
