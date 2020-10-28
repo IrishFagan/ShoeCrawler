@@ -40,13 +40,16 @@ const getSupremeStock = async (category) => {
 		.then(res => res.data.products_and_categories[category])
 }
 
-const startTask = async (task) => {
-	console.log('Starting Task')
-	products = await getSupremeStock([task.category])
+const getItem = async (task) => {
+	products = await getSupremeStock(task.category)
 	item = await products.filter(product =>
 		product.name.toLowerCase().includes(task.keyword.toLowerCase())
 	)
-	console.log(item)
+	console.log(await item)
+	return await item
+}
+
+const getStyleSize = async (item, task) => {
 	var styleRes = await axios
 		.get(`http://www.supremenewyork.com/shop/${item[0].id}.json`)
 	var styles = await styleRes.data.styles
@@ -54,26 +57,35 @@ const startTask = async (task) => {
 	var style = await styles.filter(style =>
 		style.name.toLowerCase().includes(task.color.toLowerCase())
 	)
-	style = style[0]
+	style = await style[0]
 	console.log(await style)
 	console.log(await style.sizes)
-	const size = await style.sizes[0].id
-	style = await style.id
+	var size = await style.sizes.filter(size =>
+		size.name.includes(task.size)
+	)
+	return [await size[0].id, await style.id]
+}
+
+const startTask = async (task) => {
+	console.log('Starting Task')
+	const item = await getItem(task)
+	const itemDetails = await getStyleSize(item, task)
 	console.log(await `https://supremenewyork/shop/${item[0].id}/add`)
-	console.log(await `s: ${size}, st: ${style}`)
+	console.log(await `s: ${itemDetails[0]}, st: ${itemDetails[1]}`)
+	console.log(await `${task.size}`)
 	await axios
 		.post(
 			`https://www.supremenewyork.com/shop/${item[0].id}/add`,
 			{ 
-				s: `${size}`,
-				st: `${style}`,
+				s: `${itemDetails[0]}`,
+				st: `${itemDetails[1]}`,
 				qty: 1 
 			},
 			{
 				headers: {string_headers}
 			}
 		)
-		.then(res => console.log(res))
+		.then(res => console.log(res.data))
 		.catch(error => console.log(error))
 	return
 }
@@ -85,6 +97,7 @@ const createTask = body => {
 		keyword: body.keyword,
 		color: body.color,
 		category: body.category,
+		size: body.size,
 		date: body.date,
 		id: generateId()
 	}
