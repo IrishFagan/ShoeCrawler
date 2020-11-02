@@ -126,6 +126,13 @@ app.post('/tasks', (req, res) => {
 	console.log(tasks) 
 })
 
+app.delete('/tasks/:id', (req, res) => {
+	console.log('-- Received DELETE --')
+	console.log(`Deleting ${req.params.id}`)
+	tasks = tasks.filter(task => task.id !== Number(req.params.id))
+	res.json({task: Number(req.params.id)})
+})
+
 app.listen(port, () => {
 	console.log(`Listening at http://localhost:${port}`)
 })
