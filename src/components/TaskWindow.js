@@ -31,6 +31,8 @@ const TaskWindow = () => {
             keyword={task.keyword}
             color={task.color}
             id={task.id}
+            tasks={tasks}
+            setTasks={setTasks}
           />
         )}
       </ul>
