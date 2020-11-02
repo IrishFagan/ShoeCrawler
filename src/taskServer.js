@@ -6,12 +6,15 @@ const express = require('express')
 const axios = require('axios')
 const qs = require('qs')
 const fs = require('fs')
-const axiosCookieJarSupport = require('axios-cookijar-support').default
+const axiosCookieJarSupport = require('axios-cookiejar-support').default
 const tough = require('tough-cookie')
 
 const app = express()
 const port = 3005
 var tasks = []
+
+axiosCookieJarSupport(axios)
+const cookieJar = new tough.CookieJar()
 
 const headers = {
 	'authority': 'www.supremenewyork.com',
@@ -85,10 +88,15 @@ const startTask = async (task) => {
 				qty: 1 
 			},
 			{
-				headers: {string_headers}
+				headers: {string_headers},
+				jar: cookieJar,
+				withCredentials: true
 			}
 		)
-		.then(res => console.log(res.data))
+		.then(res => {
+			console.log(res.data)
+			console.log(cookieJar.store)
+		})
 		.catch(error => console.log(error))
 	return
 }
