@@ -129,10 +129,17 @@ app.get('/start/:id', (req, res) => {
 
 app.post('/tasks', (req, res) => {
 	console.log('-- Received POST --')
-	const task = createTask(req.body)
-	console.log(task)
-	res.json(task)
-	tasks = tasks.concat(task)
+	if(req.body.keyword == "" || req.body.color == "") {
+		console.log('-- INVALID TASK --')
+		res.status(400).json({
+			error: 'content missing'
+		})
+	} else {
+		const task = createTask(req.body)
+		console.log(task)
+		res.json(task)
+		tasks = tasks.concat(task)
+	}
 	console.log(tasks) 
 })
 
